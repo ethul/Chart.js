@@ -1303,7 +1303,14 @@
 			//Check if within the range of the open/close angle
 			var withinRadius = (pointRelativePosition.distance >= this.innerRadius && pointRelativePosition.distance <= this.outerRadius);
 
-			return (betweenAngles && withinRadius);
+      //Check that the start and end angles are not the same. When they
+      //are the same and equal to 2*PI, then inRange returns true. This
+      //resulted in displaying tooltips for segments with a value of
+      //zero. Prevent that by ensuring the start and end angles are not
+      //the same.
+      var isStartEqualToEnd = this.startAngle === this.endAngle;
+
+			return (betweenAngles && withinRadius && !isStartEqualToEnd);
 			//Ensure within the outside of the arc centre, but inside arc outer
 		},
 		tooltipPosition : function(){

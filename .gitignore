@@ -8,3 +8,5 @@ coverage/*
 docs/index.md
 
 .settings/
+
+package-lock.json
